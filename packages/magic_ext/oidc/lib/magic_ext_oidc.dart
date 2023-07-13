@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:magic_ext_oidc/open_id_configuration.dart';
 import 'package:magic_sdk/magic_sdk.dart';
 import 'package:magic_sdk/modules/base_module.dart';
@@ -18,8 +16,8 @@ class OidcExtension extends BaseModule {
         params: [
           {'jwt': configuration.jwt, 'providerId': configuration.providerId}
         ]).then((jsMsg) {
-      var relayerResponse = RelayerResponse<String>.fromJson(
-          json.decode(jsMsg.message), (json) => json.toString());
+      var relayerResponse =
+          RelayerResponse<String>.fromJson(jsMsg, (json) => json.toString());
       return relayerResponse.response.result;
     });
   }

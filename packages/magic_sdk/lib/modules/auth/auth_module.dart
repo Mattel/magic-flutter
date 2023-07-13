@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import '../../provider/rpc_provider.dart';
 import '../../provider/types/relayer_response.dart';
@@ -22,8 +21,9 @@ class AuthModule extends BaseModule {
     return sendToProvider(
         method: AuthMethod.magic_auth_login_with_magic_link,
         params: [params]).then((jsMsg) {
-      var relayerResponse = RelayerResponse<String>.fromJson(
-          json.decode(jsMsg.message), (json) => json as String);
+      var relayerResponse =
+          RelayerResponse<String>.fromJson(jsMsg, (json) => json as String);
+      // json.decode(jsMsg.message), (json) => json as String);
       return relayerResponse.response.result;
     });
   }
@@ -34,8 +34,9 @@ class AuthModule extends BaseModule {
     return sendToProvider(
         method: AuthMethod.magic_auth_login_with_sms,
         params: [params]).then((jsMsg) {
-      var relayerResponse = RelayerResponse<String>.fromJson(
-          json.decode(jsMsg.message), (json) => json as String);
+      var relayerResponse =
+          RelayerResponse<String>.fromJson(jsMsg, (json) => json as String);
+      // json.decode(jsMsg.message), (json) => json as String);
       return relayerResponse.response.result;
     });
   }
@@ -46,8 +47,9 @@ class AuthModule extends BaseModule {
     return sendToProvider(
         method: AuthMethod.magic_auth_login_with_email_otp,
         params: [params]).then((jsMsg) {
-      var relayerResponse = RelayerResponse<String>.fromJson(
-          json.decode(jsMsg.message), (json) => json as String);
+      var relayerResponse =
+          RelayerResponse<String>.fromJson(jsMsg, (json) => json as String);
+      // json.decode(jsMsg.message), (json) => json as String);
       return relayerResponse.response.result;
     });
   }

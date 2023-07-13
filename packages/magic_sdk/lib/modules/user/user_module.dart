@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import '../../modules/base_module.dart';
 import '../../modules/user/user_response_type.dart';
@@ -21,8 +20,9 @@ class UserModule extends BaseModule {
     return sendToProvider(
         method: UserMethod.magic_auth_get_id_token,
         params: [params]).then((jsMsg) {
-      var relayerResponse = RelayerResponse<String>.fromJson(
-          json.decode(jsMsg.message), (json) => json as String);
+      var relayerResponse =
+          RelayerResponse<String>.fromJson(jsMsg, (json) => json.toString());
+      // json.decode(jsMsg.message), (json) => json as String);
       return relayerResponse.response.result;
     });
   }
@@ -34,8 +34,9 @@ class UserModule extends BaseModule {
     return sendToProvider(
         method: UserMethod.magic_auth_generate_id_token,
         params: [params]).then((jsMsg) {
-      var relayerResponse = RelayerResponse<String>.fromJson(
-          json.decode(jsMsg.message), (json) => json as String);
+      var relayerResponse =
+          RelayerResponse<String>.fromJson(jsMsg, (json) => json.toString());
+      // json.decode(jsMsg.message), (json) => json as String);
       return relayerResponse.response.result;
     });
   }
@@ -45,7 +46,8 @@ class UserModule extends BaseModule {
     return sendToProvider(method: UserMethod.magic_auth_get_metadata)
         .then((jsMsg) {
       var relayerResponse = RelayerResponse<UserMetadata>.fromJson(
-          json.decode(jsMsg.message),
+          jsMsg,
+          // json.decode(jsMsg.message),
           (json) => UserMetadata.fromJson(json as Map<String, dynamic>));
       return relayerResponse.response.result;
     });
@@ -55,8 +57,9 @@ class UserModule extends BaseModule {
   Future<bool> isLoggedIn() async {
     return sendToProvider(method: UserMethod.magic_auth_is_logged_in)
         .then((jsMsg) {
-      var relayerResponse = RelayerResponse<bool>.fromJson(
-          json.decode(jsMsg.message), (json) => json as bool);
+      var relayerResponse =
+          RelayerResponse<bool>.fromJson(jsMsg, (json) => json as bool);
+      // json.decode(jsMsg.message), (json) => json as bool);
       return relayerResponse.response.result;
     });
   }
@@ -69,8 +72,9 @@ class UserModule extends BaseModule {
     return sendToProvider(
         method: UserMethod.magic_auth_update_email,
         params: [params]).then((jsMsg) {
-      var relayerResponse = RelayerResponse<bool>.fromJson(
-          json.decode(jsMsg.message), (json) => json as bool);
+      var relayerResponse =
+          RelayerResponse<bool>.fromJson(jsMsg, (json) => json as bool);
+      // json.decode(jsMsg.message), (json) => json as bool);
       return relayerResponse.response.result;
     });
   }
@@ -78,8 +82,9 @@ class UserModule extends BaseModule {
   /// Returns [Future] of [bool], Logs out the currently authenticated Magic user
   Future<bool> logout() async {
     return sendToProvider(method: UserMethod.magic_auth_logout).then((jsMsg) {
-      var relayerResponse = RelayerResponse<bool>.fromJson(
-          json.decode(jsMsg.message), (json) => json as bool);
+      var relayerResponse =
+          RelayerResponse<bool>.fromJson(jsMsg, (json) => json as bool);
+      // json.decode(jsMsg.message), (json) => json as bool);
       return relayerResponse.response.result;
     });
   }
