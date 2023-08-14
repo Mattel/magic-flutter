@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../provider/types/relayer_request.dart';
@@ -97,7 +98,9 @@ class WebViewRelayerState extends State<WebViewRelayer> {
   void initState() {
     super.initState();
     // Enable hybrid composition.
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    if (!kIsWeb) {
+      if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    }
   }
 
   @override
